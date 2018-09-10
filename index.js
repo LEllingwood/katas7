@@ -1,12 +1,12 @@
 // 1.  forEach() 
-function find(array, callbackToRunOnEachItem) {
+function findEvery(array, callbackToRunOnEachItem) {
     for (let index = 0; index < array.length; index++) {
         const currentValue = array[index]
         callbackToRunOnEachItem(currentValue, index, array)
     }
 }
 const letters = ['a', 'b', 'c', 'd', 'e']
-find(letters, function (letter, index, array) {
+findEvery(letters, function (letter, index, array) {
     const letterIsVowel =
         letter === 'a' || letter === 'e' || letter === 'i' || letter === 'o' || letter === 'u'
     const letterType = letterIsVowel ? 'vowel' : 'consonant'
@@ -45,20 +45,54 @@ some(letters, function (letter, index, array) {
 
 // 4. find() 
 {
-function find(array, callbackToRunFindOnEachItem) {
-    for (let index = 0; index < array.length; index++) {
-        const currentValue = array[index]
-        callbackToRunFindOnEachItem(currentValue, index, array)
+    function findEvery(array, callbackToRunFindOnEachItem) {
+        for (let index = 0; index < array.length; index++) {
+            const currentValue = array[index]
+            callbackToRunFindOnEachItem(currentValue, index, array)
+        }
     }
+    const numbers = [3, 10, 766, 9, 8]
+    findEvery(numbers, function (number, index, array) {
+        const firstNumberGreaterThanTen = []
+        if (number >= 10) {
+            firstNumberGreaterThanTen.push(numbers[index])
+            console.log(firstNumberGreaterThanTen)
+        }
+    })
 }
-const numbers = [3, 10, 766, 9, 8]
-find(numbers, function (number, index, array) {
-    const letterIsVowel =
-        number === 'a' || number === 'e' || number === 'i' || number === 'o' || number === 'u'
-    const letterType = letterIsVowel ? 'vowel' : 'consonant'
-    console.log(`The letter '${number}' at position ${index} of ${array} is a ${letterType}.`)
-})
-}
+// this isn't doing quite what i want it to.  
+
 // 5. findIndex() 
+{
+    function findEvery(array, callbackToRunFindIndexOnEachItem) {
+        for (let index = 0; index < array.length; index++) {
+            const currentValue = array[index]
+            callbackToRunFindIndexOnEachItem(currentValue, index, array)
+        }
+    }
+    const numbers = [3, 4, 7, 95, 87]
+    findEvery(numbers, function (number, index, array) {
+        const firstNumberGreaterThanTen = []
+        if (number > 10) {
+            console.log(`The number ${number} is at position ${index}`)
+        }
+    })
+}
 // 6. every() 
+{
+    function findEvery(array, callbackToRunFindEveryOnEachItem) {
+        for (let index = 0; index < array.length; index++) {
+            const currentValue = array[index]
+            callbackToRunFindEveryOnEachItem(currentValue, index, array)
+        }
+    }
+    const numbers = [99, 10, 766, 987, 8]
+    findEvery(numbers, function (number, index, array) {
+        const firstNumberGreaterThanTen = []
+        if (number <= 100) {
+            firstNumberGreaterThanTen.push(numbers[index])
+            console.log(firstNumberGreaterThanTen)
+        }
+    })
+}
 // 7. filter()
