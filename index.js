@@ -26,8 +26,8 @@ function map(array, callbackToMapEachItem) {
 const numbers = ['1', '2', '3', '5', '10']
 let squaredNumbers = map(numbers, function (number, index, array) {
     return (number * number);
-}) 
-    console.log(squaredNumbers)
+})
+console.log(squaredNumbers)
 
 // 3. some() Tests whether at least one element in the array passes the test implemented by the function. Returns true or false.
 function some(array, callbackToRunSome) {
@@ -49,13 +49,13 @@ some(letters, function (letter, index, array) {
     function find(array, callbackToRunFindOnEachItem) {
         for (let index = 0; index < array.length; index++) {
             const currentValue = array[index]
-             let found = callbackToRunFindOnEachItem(currentValue, index, array)
+            let found = callbackToRunFindOnEachItem(currentValue, index, array)
             if (found === true) return currentValue
         }
         return undefined
     }
     const numbers = [3, 10, 766, 9, 8]
-   let foundValue = find(numbers, function (number, index, array) {
+    let foundValue = find(numbers, function (number, index, array) {
         return number >= 9.5
     })
     console.log(foundValue)
@@ -78,6 +78,7 @@ some(letters, function (letter, index, array) {
     })
 }
 // 6. every() The every method tests whether all elements in an array pass the test implemented by the function.  returns true/false
+// i think this one might be wrong
 {
     function findEvery(array, callbackToRunFindEveryOnEachItem) {
         for (let index = 0; index < array.length; index++) {
@@ -88,28 +89,82 @@ some(letters, function (letter, index, array) {
     const numbers = [99, 10, 766, 987, 8, 100]
     findEvery(numbers, function (number, index, array) {
         const doAllNumbersComply = (numbers < 100) ? true : false;
-            console.log(doAllNumbersComply)
+        console.log(doAllNumbersComply)
 
     })
 }
 
 // 7. filter() Creates a new array with all elements that pass the test implented by the function.  returns a new array.
-// again, this doesn't seem to be in one array, although the function is working (it's identifying those ages in the array under 30. not sure why)
-{
-    function filter(array, callbackToRunFilterOnEachItem) {
-        for (let index = 0; index < array.length; index++) {
-            const currentValue = array[index]
-            callbackToRunFilterOnEachItem(currentValue, index, array)
-        }
-    }
-    const ages = [14, 56, 23, 78, 19, 6]
-    filter(ages, function (number, index, array) {
-        const agesThatMeetCriteria = []
-        if ((ages[index]) < 30){
-            agesThatMeetCriteria.push(ages[index])
-        }
-        console.log(agesThatMeetCriteria)
-    })
-    
-}
 
+function filter(array, callbackToRunFilterOnEachItem) {
+    let agesThatMeetCriteria = []
+    for (let index = 0; index < array.length; index++) {
+        const currentValue = array[index]
+        let found = agesThatMeetCriteria.push(callbackToRunFilterOnEachItem(currentValue, index, agesThatMeetCriteria))
+    }
+    return agesThatMeetCriteria
+}
+const ages = [14, 56, 23, 78, 19, 6]
+let foundAges = filter(ages, function (age, index, array) {
+    // return age > 30;
+    if (age > 30) {
+        return age
+    } else {return ""}
+})
+console.log(foundAges)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     {
+//         function find(array, callbackToRunFindOnEachItem) {
+//             for (let index = 0; index < array.length; index++) {
+//                 const currentValue = array[index]
+//                  let found = callbackToRunFindOnEachItem(currentValue, index, array)
+//                 if (found === true) return currentValue
+//             }
+//             return undefined
+//         }
+//         const numbers = [3, 10, 766, 9, 8]
+//        let foundValue = find(numbers, function (number, index, array) {
+//             return number >= 9.5
+//         })
+//         console.log(foundValue)
+//     }
+
+
+// function map(array, callbackToMapEachItem) {
+//     let newArray = []
+//     for (let index = 0; index < array.length; index++) {
+//         const currentValue = array[index]
+//         newArray.push(callbackToMapEachItem(currentValue, index, newArray))
+//     }
+//     return newArray
+// }
+// const numbers = ['1', '2', '3', '5', '10']
+// let squaredNumbers = map(numbers, function (number, index, array) {
+//     return (number * number);
+// }) 
+//     console.log(squaredNumbers)
