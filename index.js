@@ -14,20 +14,20 @@ findEvery(letters, function (letter, index, array) {
 })
 
 // 2. map() creates a new array with the results of calling a provided function on every element in the calling array. Returns a new array with each element
-// this isn't putting the numbers in one array.  why?  
 
 function map(array, callbackToMapEachItem) {
+    let newArray = []
     for (let index = 0; index < array.length; index++) {
         const currentValue = array[index]
-        callbackToMapEachItem(currentValue, index, array)
+        newArray.push(callbackToMapEachItem(currentValue, index, newArray))
     }
+    return newArray
 }
 const numbers = ['1', '2', '3', '5', '10']
-map(numbers, function (number, index, array) {
-    const newArray = []
-    newArray.push(number * number)
-    console.log(newArray)
-})
+let squaredNumbers = map(numbers, function (number, index, array) {
+    return (number * number);
+}) 
+    console.log(squaredNumbers)
 
 // 3. some() Tests whether at least one element in the array passes the test implemented by the function. Returns true or false.
 function some(array, callbackToRunSome) {
@@ -45,22 +45,20 @@ some(letters, function (letter, index, array) {
 })
 
 // 4. find() Returns the value of the first element in the array that satisfies the provided testing function.  
-// this isn't doing quite what i want it to.  It's pulling all examples that meet the conditions, not just the first.  I think i need to "break" or "return" after it finds the first one, but not sure how to make that work
 {
     function find(array, callbackToRunFindOnEachItem) {
         for (let index = 0; index < array.length; index++) {
             const currentValue = array[index]
-            callbackToRunFindOnEachItem(currentValue, index, array)
+             let found = callbackToRunFindOnEachItem(currentValue, index, array)
+            if (found === true) return currentValue
         }
+        return undefined
     }
     const numbers = [3, 10, 766, 9, 8]
-    find(numbers, function (number, index, array) {
-        const firstNumberGreaterThanTen = []
-        if (number >= 10) {
-            firstNumberGreaterThanTen.push(numbers[index])
-            console.log(firstNumberGreaterThanTen)
-        }
+   let foundValue = find(numbers, function (number, index, array) {
+        return number >= 9.5
     })
+    console.log(foundValue)
 }
 
 // 5. findIndex() returns the index of the first element in the array that satisfies the provided testing function.  Otherwise, -1 is returned.
